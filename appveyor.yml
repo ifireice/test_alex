@@ -1,0 +1,34 @@
+build: off
+
+environment:
+  GOPATH: c:\gopath
+
+before_test:
+  - mkdir c:\gopath\src\github.com\AlexeyZXC\
+  - cd c:\gopath\src\github.com\AlexeyZXC\
+  - git clone -b lesson-8 https://github.com/AlexeyZXC/go2
+  - mkdir c:\gopath\src\go2\
+  - mkdir c:\gopath\src\go2\dupRemover
+  - move "c:\gopath\src\github.com\AlexeyZXC\go2\dupRemover\dupRemover.go" "c:\gopath\src\go2\dupRemover"
+
+test_script:
+  - cd c:\gopath\src\github.com\AlexeyZXC\
+  - mkdir c:\gopath\src\github.com\AlexeyZXC\go2\dupRemover\mytest
+  - mkdir c:\gopath\src\github.com\AlexeyZXC\go2\dupRemover\mytest\include
+  - mkdir c:\gopath\src\github.com\AlexeyZXC\go2\dupRemover\mytest\f
+  - mkdir c:\gopath\src\github.com\AlexeyZXC\go2\dupRemover\mytest\f\include
+  - echo This is a sample text file > c:\gopath\src\github.com\AlexeyZXC\go2\dupRemover\mytest\a.txt
+  - echo This is a sample text file > c:\gopath\src\github.com\AlexeyZXC\go2\dupRemover\mytest\b.txt
+  - echo This is a sample text file >  c:\gopath\src\github.com\AlexeyZXC\go2\dupRemover\mytest\B.txt
+  - echo This is a sample text file > c:\gopath\src\github.com\AlexeyZXC\go2\dupRemover\mytest\include\a.txt
+  - echo This is a sample text file > c:\gopath\src\github.com\AlexeyZXC\go2\dupRemover\mytest\include\b.txt
+  - echo This is a sample text file > c:\gopath\src\github.com\AlexeyZXC\go2\dupRemover\mytest\include\c.txt
+  - echo This is a sample text file > c:\gopath\src\github.com\AlexeyZXC\go2\dupRemover\mytest\f\b.txt
+  - echo This is a sample text file > c:\gopath\src\github.com\AlexeyZXC\go2\dupRemover\mytest\f\a.txt
+  - echo This is a sample text file > c:\gopath\src\github.com\AlexeyZXC\go2\dupRemover\mytest\f\include\a.txt
+  - echo This is a sample text file > c:\gopath\src\github.com\AlexeyZXC\go2\dupRemover\mytest\f\include\b.txt
+  - echo This is a sample text file > c:\gopath\src\github.com\AlexeyZXC\go2\dupRemover\mytest\f\include\c.txt
+
+  - set GO111MODULE=auto
+  - go run c:\gopath\src\github.com\AlexeyZXC\go2\main.go -dir=c:\gopath\src\github.com\AlexeyZXC\go2\dupRemover\mytest
+
